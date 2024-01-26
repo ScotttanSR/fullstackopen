@@ -29,8 +29,8 @@ const App = () => {
 
   const addPerson = (event) => {
     event.preventDefault()
-    const newId = `${persons.length + 1}`
-    const newPerson = {name: newName , number: newNum, id: newId}
+    // const newId = `${persons.length + 1}`
+    const newPerson = {name: newName , number: newNum}
     const personExist = persons.some((person) => person.name === newName)
     if (!personExist){
       personService
@@ -39,6 +39,11 @@ const App = () => {
           setPersons(persons.concat(person))
           setMessage(`Added ${newName}`)
           setIsError(false)
+        })
+        .catch(error => {
+          setMessage(error.response.data.error)
+          setIsError(true)
+          console.log(error.response.data.error)
         })
     } else if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)){
       const updatePerson = persons.find((person) => person.name === newName)
