@@ -47,25 +47,25 @@ app.get('/api/persons', (req, res) => {
 })
 
 app.get('/info', (req, res) => {
-    const timenow = new Date()
-    res.send(`<p>Phonebook has info for ${phonebook.length} people </p> <p>${timenow}</p>`)
+  const timenow = new Date()
+  res.send(`<p>Phonebook has info for ${phonebook.length} people </p> <p>${timenow}</p>`)
 })
 
 app.get('/api/persons/:id', (req, res, next) => {
   const id = req.params.id
   Person.findById(id)
-  .then(person => {
-    if (person) {
-      res.json(person)
-    } else {
-      res.status(404).end()
-    }
-  })
-  .catch(error => next(error))
+    .then(person => {
+      if (person) {
+        res.json(person)
+      } else {
+        res.status(404).end()
+      }
+    })
+    .catch(error => next(error))
 })
 
 app.post('/api/persons', (req, res, next) => {
-  const body = req.body 
+  const body = req.body
   const nameExist = phonebook.some(person => person.name === body.name)
 
   if (!body.name) {
@@ -75,7 +75,7 @@ app.post('/api/persons', (req, res, next) => {
   } else if (!body.number) {
     return res.status(400).json({
       error: 'number missing'
-    }) 
+    })
   } else if (nameExist) {
     return res.status(400).json({
       error: 'name must be unique'
@@ -112,7 +112,7 @@ app.put('/api/persons/:id', (req, res, next) => {
     number: body.number,
   }
 
-  Person.findByIdAndUpdate(req.params.id, person, {new: true})
+  Person.findByIdAndUpdate(req.params.id, person, { new: true })
     .then(updatedPerson => {
       res.json(updatedPerson)
     })
