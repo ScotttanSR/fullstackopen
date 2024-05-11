@@ -12,6 +12,7 @@ const App = () => {
   const [filteredPersons, setFilteredPersons] = useState('')
   const [message, setMessage] = useState(null)
   const [isError, setIsError] = useState(false)
+  console.log('persons', persons);
 
   const handleOnChangeName = (event) => {
     setNewName(event.target.value)
@@ -74,7 +75,9 @@ const App = () => {
   useEffect(() => {
     personService
     .getAll()
-    .then(persons => setPersons(persons))
+    .then(persons => {
+      console.log('persons', persons);
+      return setPersons(persons)})
   }, [])
 
   return (

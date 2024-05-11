@@ -41,6 +41,7 @@ const unknownEndpoint = (request, response) => {
 let phonebook =[]
 
 app.get('/api/persons', (req, res) => {
+  console.log('code run here');
   Person.find({}).then(people => {
     res.json(people)
   })

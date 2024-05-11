@@ -22,6 +22,7 @@ app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 
 if (process.env.NODE_ENV === 'test') {
+    console.log('code run here');
     const testingRouter = require('./controllers/testing')
     app.use('/api/testing', testingRouter)
   }
